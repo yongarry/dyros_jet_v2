@@ -1,0 +1,22 @@
+<launch>
+    <arg name="gui" default="false" />
+    <arg name="controller" default="true" />
+
+    <node name="shm_reset" pkg="jet_controller" type="shm_reset" output="screen"/>
+
+
+    <group if="$(arg controller)">
+        <node name="jet_controller" pkg="jet_controller" type="jet_controller" output="screen">
+            <param name="/jet_controller/sim_mode" value="true" />
+            <param name="/jet_controller/urdf" command="$(find jet_description)/dyros_jet_legs.urdf" />
+    </group>
+
+    <node name="mujoco_ros" pkg="mujoco_ros" type="mujoco_ros" output="screen">
+        <param name="mujoco_ros/model_file" command="$(find jet_description)/dyros_jet_legs.xml" />
+        <param name="license" type="string" value="$(env HOME)/mjkey.txt" />
+        <param name="use_shm" value="true" />
+
+    <group if="$(arg gui)">
+        <node name="jet_gui" pkg="jet_gui" type="jet_gui" />
+    </group>
+</launch>

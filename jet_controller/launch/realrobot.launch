@@ -1,0 +1,18 @@
+<launch>
+    <arg name="gui" default="false" />
+    <arg name="controller" default="true" />
+
+    <node name="shm_reset" pkg="jet_controller" type="shm_reset" output="screen"/>
+
+    <param name="robot_description_urdf" command="$(find jet_description)/dyros_jet_legs.urdf" />
+    <param name="mujoco_ros/model_file" command="$(find jet_description)/dyros_jet_legs.xml" />
+
+    <group if="$(arg controller)">
+        <node name="jet_controller" pkg="jet_controller" type="jet_controller" output="screen">
+            <param name="jet/jet_controller/sim_mode" value="false" />
+    </group>
+
+    <group if="$(arg gui)">
+        <node name="jet_gui" pkg="jet_gui" type="jet_gui" />
+    </group>
+</launch>
