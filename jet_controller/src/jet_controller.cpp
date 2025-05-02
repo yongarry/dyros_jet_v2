@@ -1,7 +1,7 @@
 #include "jet_controller/jet_controller.h"
 using namespace std;
 
-JetController::JetController(StateManager &stm_global) : dc_global_(stm_global.dc_), stm_global_(stm_global), rd_global_(stm_global.dc_.rd_)
+JetController::JetController(StateManager &stm_global) : dc_(stm_global.dc_), stm_(stm_global), rd_(stm_global.dc_.rd_)
 #ifdef COMPILE_JET_CC
                                                         , my_cc(*(new CustomController(rd_gobal_)))
 #endif

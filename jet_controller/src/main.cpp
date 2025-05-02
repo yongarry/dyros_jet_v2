@@ -27,10 +27,11 @@ int main(int argc, char **argv)
 #endif
 
     rclcpp::init(argc, argv);
-    auto node = std::make_shared<rclcpp::Node>("jet_controller");
+    // auto node = std::make_shared<rclcpp::Node>("jet_controller");
 
     DataContainer dc_;
-    dc_.simMode = node->declare_parameter("/jet_controller/sim_mode", false);
+    dc_.nh = rclcpp::Node::make_shared("jet_controller");
+    dc_.simMode = dc_.nh->declare_parameter("/jet_controller/sim_mode", false);
 
     StateManager stm(dc_);
 

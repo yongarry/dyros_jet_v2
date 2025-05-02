@@ -1,9 +1,9 @@
 #include "shm_msgs.h"
+#include <iostream>
 
 int main(void)
 {
     int shm_id_;
-    SHMmsgs *shm_;
 
     if ((shm_id_ = shmget(shm_msg_key, sizeof(SHMmsgs), IPC_CREAT | 0666)) == -1)
     {

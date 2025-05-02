@@ -18,9 +18,9 @@ public:
     void *Thread2();
     void *Thread3();
 
-    DataContainer &dc_global_;
-    StateManager &stm_global_;
-    RobotData &rd_global_;
+    DataContainer &dc_;
+    StateManager &stm_;
+    RobotData &rd_;
 
 #ifdef COMPILE_JET_CC
     CustomController &my_cc_;
@@ -48,10 +48,4 @@ public:
     std::atomic<bool> triggerThread3;
 
 };
-
-const std::string cred("\033[0;31m");
-const std::string creset("\033[0m");
-const std::string cblue("\033[0;34m");
-const std::string cgreen("\033[0;32m");
-const std::string cyellow("\033[0;33m");
 #endif // JET_CONTROLLER_H
